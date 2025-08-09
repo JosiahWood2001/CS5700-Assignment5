@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "1.9.10"
 }
 
 group = "org.example"
@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
 }
 
 tasks.test {

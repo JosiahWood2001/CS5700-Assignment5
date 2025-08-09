@@ -14,7 +14,7 @@ object MissingCapitalAndSpecial : PasswordState(){
 object MissingSpecial : PasswordState(){
     override fun handle(character: String, context: PasswordContext) {
         if (CharacterClassification.isSpecial(character)){
-            context.setState(ValidPassword)
+            context.setState(EndingWithSpecial)
         }
     }
 }
@@ -25,7 +25,17 @@ object MissingCapital : PasswordState(){
         }
     }
 }
+object EndingWithSpecial : PasswordState(){
+    override fun handle(character: String, context: PasswordContext) {
+        if (!CharacterClassification.isSpecial(character)){
+            context.setState(ValidPassword)
+        }
+    }
+}
 object ValidPassword : PasswordState(){
     override fun handle(character: String, context: PasswordContext) {
+        if (CharacterClassification.isSpecial(character)){
+            context.setState(EndingWithSpecial)
+        }
     }
 }

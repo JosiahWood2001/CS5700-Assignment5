@@ -1,4 +1,4 @@
-class Check {
+object Check {
     fun int(string: String): Boolean{
         return IntegerContext().validate(string)
     }
