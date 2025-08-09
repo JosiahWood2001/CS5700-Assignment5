@@ -3,4 +3,7 @@ class PasswordContext : RegexChecker<PasswordContext, PasswordState>() {
     override fun isValid(): Boolean{
         return currentState==ValidPassword
     }
+    override fun otherConstraints(string: String): Boolean {
+        return string.length>=8
+    }
 }

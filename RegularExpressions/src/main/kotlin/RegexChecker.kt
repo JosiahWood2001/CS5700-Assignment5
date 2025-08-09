@@ -4,10 +4,13 @@ abstract class RegexChecker<C : RegexChecker<C, S>, S: RegexState<C, S>> : Conte
         for (char in string){
             currentState.handle(char.toString(), this as C)
         }
-        return isValid()
+        return isValid()&&otherConstraints(string)
     }
     override fun setState(state: S){
         currentState = state
     }
     protected abstract fun isValid(): Boolean
+    open fun otherConstraints(string: String): Boolean{
+        return true
+    }
 }
