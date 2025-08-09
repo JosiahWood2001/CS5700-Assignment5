@@ -1,18 +1,24 @@
 abstract class IntegerState : RegexState<IntegerContext, IntegerState>() {
     abstract override fun handle(character: String, context: IntegerContext)
 }
-object LookingForFirstValue : IntegerState(){
+object LookingForFirstValueInteger : IntegerState(){
     override fun handle(character: String, context: IntegerContext) {
-
+        if (CharacterClassification.isPositive(character)){
+            context.setState(ValidInteger)
+        }
+        else {
+            context.setState(InvalidInteger)
+        }
     }
 }
-object Valid : IntegerState(){
+object ValidInteger : IntegerState(){
     override fun handle(character: String, context: IntegerContext) {
-
+        if (!CharacterClassification.isDigit(character)){
+            context.setState(InvalidInteger)
+        }
     }
 }
-object Invalid : IntegerState(){
+object InvalidInteger : IntegerState(){
     override fun handle(character: String, context: IntegerContext) {
-
     }
 }
